@@ -1,16 +1,22 @@
 ---
 layout: post
-title:  "Welcome to Jekyll!"
-date:   2014-11-17 13:31:01 +0800
-categories: jekyll
-tag: jekyll
+title:  "欢迎来到正锑的博客！"
+date:   2019-5-2 15:00:00 +0800
+categories: 杂谈
+tag: 杂谈
 ---
 
 * content
 {:toc}
-
-
-First POST build by Jekyll.
+Github 
+    ztmail723
+B站
+    正锑
+百度
+    正锑的小号
+邮箱
+    ztmail723@gmail.com
+    723302667@qq.com
 
 
 诫子书				{#zhugeliang}
@@ -26,6 +32,7 @@ First POST build by Jekyll.
 年与时驰，意与日去，遂成枯落，多不接世，悲守穷庐，将复何及！
 
 
-[jekyll]:      http://jekyllrb.com
+[正锑的小号]:      http://tieba.baidu.com/home/main/?un=%E6%AD%A3%E9%94%91%E7%9A%84%E5%B0%8F%E5%8F%B7
+[正锑]:      https://space.bilibili.com/291524
 [jekyll-gh]:   https://github.com/jekyll/jekyll
 [jekyll-help]: https://github.com/jekyll/jekyll-help
