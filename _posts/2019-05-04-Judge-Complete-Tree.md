@@ -43,7 +43,7 @@ struct Tree//树节点的结构体定义
 };
 bool judge(Tree *root)//传入树的根节点，判断该树是否为完全二叉树
 {
-    static queue<Tree*> q;//静态临时队列
+    queue<Tree*> q;//临时队列
     Tree* p;
     q.push(root);//根节点入队
     bool flag=false;//结束标记默认未打开
