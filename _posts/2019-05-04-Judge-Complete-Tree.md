@@ -1,3 +1,14 @@
+<head>
+    <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            inlineMath: [['$','$']]
+            }
+        });
+    </script>
+</head>
 ---
 layout: post
 title:  判断给定二叉树是否为完全二叉树(C++)
@@ -12,7 +23,7 @@ tag: 算法 树
 
 什么是完全二叉树
 -------------------------------------
-一颗非空高度为k(k>=0)的满二叉树，是有2^(k-1)-1个结点的二叉树。   
+一颗非空高度为k(k>=0)的满二叉树，是有 $ 2^(k-1)-1 $ 个结点的二叉树。   
 一颗包含n个结点高度为k的二叉树T，当按层次顺序编号T的所有结点，对应于一棵高度为k的满二叉树中编号由1至n的那些结点时，T被称为完全二叉树(complete binary)。  
 
 C++代码
