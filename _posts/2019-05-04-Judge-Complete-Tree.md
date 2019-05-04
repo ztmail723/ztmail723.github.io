@@ -3,7 +3,7 @@ layout: post
 title:  判断给定二叉树是否为完全二叉树(C++)
 date:   2019-05-04 15:00:00 +0800
 categories: 技术文档
-tag: 算法 树
+tag: 算法
 ---
 <head>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
