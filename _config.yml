@@ -8,8 +8,8 @@ github: https://github.com/ztmail723
 baseurl: ''
 description: 我们在黑暗中并肩而行
 meta_description: 正锑;个人博客
-motto: 杜绝戾气
-banner: 祝你一切顺利
+motto: ZT Magic
+banner: ZT Magic
 
 #permalink: /:categories/:year/:month/:day/:title/
 permalink: /:year/:month/:day/:title/
