@@ -1,12 +1,12 @@
 # Site settings
-name: ZT blog
+name: ZT Magic
 email: ztmail723@gmail.com
 author: 正锑
-url: http://ztmagic.club/
-resume_site: http://ztmagic.club/
+url: https://www.ztmagic.com/
+resume_site: https://www.ztmagic.com/
 github: https://github.com/ztmail723
 baseurl: ''
-description: Actually, less is more!
+description: 我们在黑暗中并肩而行
 meta_description: 正锑;个人博客
 motto: 杜绝戾气
 banner: 杜绝戾气
