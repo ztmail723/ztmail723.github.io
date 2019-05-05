@@ -76,6 +76,7 @@ int Prior(char signword)
 {
     switch(signword)
     {
+    case '=':return -1;//等于号作为哨兵项
     case ')':return 0;
     case '+':
     case '-':return 1;
@@ -110,37 +111,20 @@ unsigned int ComputeExpression(char *Expression)
 {
     stack<unsigned int> NumStack;//数字栈
     stack<char> SignStack;//符号栈
-    unsigned int tempB;//临时变量
-    for(int i=0;Expression[i]!='=';i++)
+    for(int i=0;Expression[i]!='\0';i++)
     {
-        if(Isnum(Expression[i]))
-        {
-            NumStack.push(Thenum(Expression,i));
-        }
+        if(Isnum(Expression[i])) NumStack.push(Thenum(Expression,i));
         else
         {
-            while(!SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i]))
+            for(unsigned int tempB;!SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i]);SignStack.pop())
             {
-                if(SignStack.top()=='(')//如果遇到左括号，弹出并终止
-                {
-                    SignStack.pop();
-                    break;
-                }
+                if(SignStack.top()=='(')continue;//遇到左括号，继续
                 tempB=NumStack.top();
                 NumStack.pop();
                 NumStack.top()=ComputeOne(NumStack.top(),tempB,SignStack.top());
-                SignStack.pop();
             }
             if(Expression[i]!=')')SignStack.push(Expression[i]);
         }
-    }
-    while(!SignStack.empty())
-    {
-        unsigned int tempB;
-        tempB=NumStack.top();
-        NumStack.pop();
-        NumStack.top()=ComputeOne(NumStack.top(),tempB,SignStack.top());
-        SignStack.pop();
     }
     return NumStack.top();
 }
