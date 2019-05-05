@@ -116,7 +116,9 @@ unsigned int ComputeExpression(char *Expression)
         if(Isnum(Expression[i])) NumStack.push(Thenum(Expression,i));
         else
         {
-            for(unsigned int tempB;!SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i]);SignStack.pop())
+            for(unsigned int tempB;\
+                !SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i]);\
+                SignStack.pop())
             {
                 if(SignStack.top()=='(')continue;//遇到左括号，继续
                 tempB=NumStack.top();
