@@ -11,10 +11,11 @@ tag: 剧本
 
 
 
-视频[bilibili](https://www.bilibili.com/video/av46905502/?p=2)  
-A.主板机器人  
-B.高个子机器人  
-C.小个子机器人
+原视频在线观看：[bilibili](https://www.bilibili.com/video/av46905502/?p=2)  
+
+	A.主板机器人  
+	B.高个子机器人  
+	C.小个子机器人
 
 	C: Hey, guys, stop goofing around and check this out.
 	伙计们，别闹了，看看这个
