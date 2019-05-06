@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  直面生命的荒谬
+title:  辩论赛记录：直面生命的荒谬
 date:   2019-05-06 20:00:00 +0800
 categories: 记录
 tag: 辩论赛
