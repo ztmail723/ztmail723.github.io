@@ -120,7 +120,7 @@ C语言中位操作(Bitwise operation)有以下六种：
 {% highlight c++%}
 int add(int a,int b)
 {
-	return b==0?a:add(a^b,a&b<<1);
+    return b==0?a:add(a^b,a&b<<1);
 }    
 {% endhighlight%}
 
