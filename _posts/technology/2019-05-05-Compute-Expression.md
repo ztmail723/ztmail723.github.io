@@ -122,6 +122,17 @@ tag: 算法
 建立两个栈，一个为NumStack为数字栈，一个叫SignStack为符号栈。  
 对每种符号设定优先级，整个读取过程中保持【符号的优先级递增】。  
 
+注意事项
+-------------------------------------
+1.对于括号的处理。括号不等同于普通的运算符，存在左括号与右括号。对此，我采取以下处理方式：
+
+    【1】发现左括号，强制入栈。
+    【2】左括号优先级最小，使得左括号后的运算符不会穿过左括号进行计算。
+    【3】发现右括号，右括号优先级最小，于是会一直结算至左括号。
+    【4】结算至左括号的时候，直接让左括号弹出，中断本次结算循环。
+    
+2.注意数据范围。运算数的范围小于等于$10^9$，但这些数运算的中间数可能超过这个数字，且可能出现负数，所以我们选择long long类型。
+
 C++代码
 -------------------------------------
 
@@ -132,9 +143,9 @@ C++代码
 using namespace std;
 bool Isnum(char numword);//判断字符是否为数字
 int Prior(char signword);//求优先级函数
-unsigned long long Thenum(char *Expression,int& i);//输出数字
-unsigned long long ComputeOne(unsigned long long A,unsigned long long B,char signword);//计算单个结果
-unsigned long long ComputeExpression(char *Expression);//输出表达式的结果
+long long Thenum(char *Expression,int& i);//输出数字
+long long ComputeOne(long long A,long long B,char signword);//计算单个结果
+long long ComputeExpression(char *Expression);//输出表达式的结果
 int main(void)
 {
     char Expression[SIZE];//表达式字符数组
@@ -160,9 +171,9 @@ int Prior(char signword)
     default: return 3;
     }
 }
-unsigned long long Thenum(char *Expression,int& i)
+long long Thenum(char *Expression,int& i)
 {
-    unsigned long long tempnum=0;//临时数字
+    long long tempnum=0;//临时数字
     while(Isnum(Expression[i]))
     {
         tempnum*=10;
@@ -171,7 +182,7 @@ unsigned long long Thenum(char *Expression,int& i)
     i--;//把引用的i减回去
     return tempnum;
 }
-unsigned long long ComputeOne(unsigned long long A,unsigned long long B,char signword)
+long long ComputeOne(long long A,long long B,char signword)
 {
     switch(signword)
     {
@@ -182,18 +193,16 @@ unsigned long long ComputeOne(unsigned long long A,unsigned long long B,char sig
         default:return 0;
     }
 }
-unsigned long long ComputeExpression(char *Expression)
+long long ComputeExpression(char *Expression)
 {
-    stack<unsigned long long> NumStack;//数字栈
+    stack<long long> NumStack;//数字栈
     stack<char> SignStack;//符号栈
     for(int i=0;Expression[i]!='\0';i++)
     {
         if(Isnum(Expression[i])) NumStack.push(Thenum(Expression,i));
         else
         {
-            for(unsigned long long tempB;\
-                !SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i])&&Expression[i]!='(';\
-                SignStack.pop())
+            for(long long tempB;!SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i])&&Expression[i]!='(';SignStack.pop())
             {
                 if(SignStack.top()=='(')//遇到左括号，强制弹出
                 {
@@ -251,4 +260,4 @@ unsigned long long ComputeExpression(char *Expression)
 可以看出，针对后缀表达式的计算只需要使用一个栈，用于存储数字。而对于中缀表达式，并不是那么容易。  
 如果想要计算5+((1+2)\*4)-3这样的中缀表达式，难点有二：  
 1. 中缀表达式的数字出现在运算符的两边，不容易存储。  
-2. 从左到右扫描到的运算符并不是【立即参与运算】，而是具有一定的优先级。  
+2. 从左到右扫描到的运算符并不是【立即参与运算】，而是具有一定的优先级，存在左右括号这种特殊的运算符。  
