@@ -132,14 +132,15 @@ C++代码
 using namespace std;
 bool Isnum(char numword);//判断字符是否为数字
 int Prior(char signword);//求优先级函数
-unsigned int Thenum(char *Expression,int& i);//输出数字
-unsigned int ComputeOne(unsigned int A,unsigned int B,char signword);//计算单个结果
-unsigned int ComputeExpression(char *Expression);//输出表达式的结果
+unsigned long long Thenum(char *Expression,int& i);//输出数字
+unsigned long long ComputeOne(unsigned long long A,unsigned long long B,char signword);//计算单个结果
+unsigned long long ComputeExpression(char *Expression);//输出表达式的结果
 int main(void)
 {
-    char Expression[SIZE];//表达式数组
+    char Expression[SIZE];//表达式字符数组
     cin>>Expression;//输入
     cout<<ComputeExpression(Expression);//输出计算结果
+    return 0;
 }
 bool Isnum(char numword)
 {
@@ -149,28 +150,28 @@ int Prior(char signword)
 {
     switch(signword)
     {
-    case '=':return -1;//等于号作为哨兵项，优先级最低
-    case ')':return 0;//右括号优先级低于所有运算符
-    case '+':
-    case '-':return 1;//加减优先级为1
-    case '*':
-    case '/':return 2;//乘除优先级为2
+    case '=':return -1;//等于号作为哨兵项
     case '(':
-    default :return 3;//左括号优先级高于其他运算符
+    case ')':return 0;
+    case '+':
+    case '-':return 1;
+    case '*':
+    case '/':return 2;
+    default: return 3;
     }
 }
-unsigned int Thenum(char *Expression,int& i)
+unsigned long long Thenum(char *Expression,int& i)
 {
-    unsigned int tempnum=0;//临时数字
+    unsigned long long tempnum=0;//临时数字
     while(Isnum(Expression[i]))
     {
         tempnum*=10;
         tempnum+=Expression[i++]-'0';
     }
-    i--;//把指针i减回去
+    i--;//把引用的i减回去
     return tempnum;
 }
-unsigned int ComputeOne(unsigned int A,unsigned int B,char signword)
+unsigned long long ComputeOne(unsigned long long A,unsigned long long B,char signword)
 {
     switch(signword)
     {
@@ -181,20 +182,24 @@ unsigned int ComputeOne(unsigned int A,unsigned int B,char signword)
         default:return 0;
     }
 }
-unsigned int ComputeExpression(char *Expression)
+unsigned long long ComputeExpression(char *Expression)
 {
-    stack<unsigned int> NumStack;//数字栈
+    stack<unsigned long long> NumStack;//数字栈
     stack<char> SignStack;//符号栈
     for(int i=0;Expression[i]!='\0';i++)
     {
         if(Isnum(Expression[i])) NumStack.push(Thenum(Expression,i));
         else
         {
-            for(unsigned int tempB;\
-                !SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i]);\
+            for(unsigned long long tempB;\
+                !SignStack.empty()&&Prior(SignStack.top())>=Prior(Expression[i])&&Expression[i]!='(';\
                 SignStack.pop())
             {
-                if(SignStack.top()=='(')continue;//遇到左括号，不运算，弹出进入下一次循环
+                if(SignStack.top()=='(')//遇到左括号，强制弹出
+                {
+                    SignStack.pop();
+                    break;
+                }
                 tempB=NumStack.top();
                 NumStack.pop();
                 NumStack.top()=ComputeOne(NumStack.top(),tempB,SignStack.top());
@@ -204,15 +209,16 @@ unsigned int ComputeExpression(char *Expression)
     }
     return NumStack.top();
 }
+
 {% endhighlight%}
 
 输入样例
 
-    (1+2)*3/2=
+    (5+(2+3)*4-3)=
 
 输出样例
 
-    4
+    22
 
 思考题
 -------------------------------------
