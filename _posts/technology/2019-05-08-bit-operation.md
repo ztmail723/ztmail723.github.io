@@ -53,7 +53,7 @@ C语言中位操作(Bitwise operation)有以下六种：
 	a<<2= 01000100 = 68
 	b>>1= 11111110 = -2
 
-如何用位运算模拟加法
+如何用位运算模拟加法和减法
 -------------------
 由数字电路的知识我们知道，二进制补码可以把减法转换成加法。比如a-b的值我们可以表示为a+(-b)。所以，我们首先讨论如何用六种位运算模拟加法。  
 首先针对每一位，我们如下四种可能
@@ -118,10 +118,32 @@ C语言中位操作(Bitwise operation)有以下六种：
 加法运算，用以下递归关系式即可解决
 
 {% highlight c++%}
-int add(int a,int b)
+int bit_add (int a,int b)
 {
-    return b==0?a:add(a^b,a&b<<1);
-}    
+    return b==0?a:bit_add(a^b,a&b<<1);
+}
 {% endhighlight%}
 
-(未完待续)
+A的相反数的补码=A的补码取反加一，掌握这一点就能根据加法很快得出减法的算法。
+{% highlight c++%}
+int bit_minus(int a,int b)
+{
+    return bit_add(a,bit_add(~b,1));
+}
+{% endhighlight%}
+
+如何用位运算模拟乘法
+-------------------
+根据加法位运算的思想，可以很容易得到位运算乘法的算法。
+遍历乘法所有位，若第i位为1，则最后结果加上原数左移i位后的值。（代表乘2的i次方）。
+{% highlight c++%}
+int bit_mul(int a,int b)
+{
+    int temp=0;
+    for(int i=0;i<BIT-1;i++)
+    {
+        if((b>>i)&1)temp=bit_add(temp,a<<i);
+    }
+    return temp;
+}
+{% endhighlight%}
